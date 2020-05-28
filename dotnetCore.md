@@ -83,3 +83,43 @@ What is middleware? middleware essentially is responsible for handling the req/r
 
 Similar to package.json where dependencies are globally available within your package. Imagine a wrapper container 
 
+# USING .NET CORE for Backend Purposes only.
+
+Prior to working on your controllers and models, you generally start with your startup.cs file to integrate your models/controllers. 
+
+In your configure services you'd want to add:
+    services.AddMVvc().SetCompatibilityVersion.Version.2.1);
+                        # Setting the version prevents your code from breaking in the future while working with future versions
+
+In your Configure IApplicationBuilder you'd want to add after the if statement add an else where:
+    app.UseHsts() <--> force browser to only allow https connections to connect to the domain.
+
+app.UseHttpsRedirection() <-> Redirect to https if coming from http request.
+app.UseMvc() 
+
+## Controllers 
+
+Naming schematic matters. Naming your file SomethingController.cs will automatically give you a template of a controller file.
+
+ex: 
+
+namespace SomethingController.cs 
+{
+    [Route("abc")]
+    [ApiController]
+
+    public class InventoryController: ControllerBase 
+    {   
+        [HttpPost]    
+        public ActionResult:<InventoryItems> AddInventoryItems() 
+        {
+            return Ok(); 
+        }
+    }
+}
+
+Looking at the above example, this is an example route. 
+
+ActionResult is a .net core class that takes in a model InventoryItems. Above the API we made we define the type to be 
+a post request in brackets.
+
