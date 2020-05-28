@@ -131,3 +131,8 @@ instead of using public you can use private attributes
 
 get { return rating; } 
 set { rating = value }
+
+# Dictionaires
+
+Dictionairy<string, int> (You define key value pairs here) 
+

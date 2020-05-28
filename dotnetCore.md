@@ -97,12 +97,12 @@ In your Configure IApplicationBuilder you'd want to add after the if statement a
 app.UseHttpsRedirection() <-> Redirect to https if coming from http request.
 app.UseMvc() 
 
-## Controllers 
+# Controllers 
 
 Naming schematic matters. Naming your file SomethingController.cs will automatically give you a template of a controller file.
 
 ex: 
-
+```
 namespace SomethingController.cs 
 {
     [Route("abc")]
@@ -111,15 +111,74 @@ namespace SomethingController.cs
     public class InventoryController: ControllerBase 
     {   
         [HttpPost]    
-        public ActionResult:<InventoryItems> AddInventoryItems() 
-        {
-            return Ok(); 
+        public ActionResult:<InventoryItems> AddInventoryItems(InventoryItems Items) 
+        {   
+            var InventoryItems = service.AddInventoryItems(items)
+            if (InventoryItems == null) 
+            {
+                return NotFound() 
+            }
+            return InventoryItems; 
         }
     }
 }
+``` 
 
 Looking at the above example, this is an example route. 
 
 ActionResult is a .net core class that takes in a model InventoryItems. Above the API we made we define the type to be 
 a post request in brackets.
+
+Our Post request takes in an Inventory Item Object and the lines after that are rudimentary validation checks. 
+
+# Models 
+
+``` 
+public class InventoryClass 
+{
+    public int id { get : set } 
+
+    public string ItemName { get : set }
+
+    public double Price { get : set }
+}
+``` 
+
+attributes of the class. You can define get : set which essentially is short hand for :
+``` 
+get {
+    return this.attribute
+}
+set {
+    this.attribute = value; 
+}
+``` 
+
+# Services 
+
+Prior to implementing a service, you need to include it in your startup.cs
+```
+services.AddSingleton<IInventoryServices, InventoryServices>();
+```
+
+And in your original route, you need to include it in your constructor ex:
+
+```
+public readonly InventoryController IInventoryServices _services;
+
+public InventoryController(IInventoryServices services)
+{
+    _services = services; 
+}
+```
+
+public class InventoryServices : IInventoryServices
+{
+    Public InventoryItems AddInventoryItems(InventoryItems items) 
+    {
+
+    }
+}
+
+Essentially your services will do the leg work of saving/persisting your data to a database. This part requires integration of an existing database or in our example just using a simple dictionairy to store our info can work for the sake of practice. 
 
