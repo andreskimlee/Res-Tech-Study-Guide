@@ -102,7 +102,25 @@ static attributes for classes are fixed
 you can also have static classes where you cannot create instances of that class but have access to methods within the class
 best example is the Math class. You dont create instances of the Math class since it is a static class.
 
+### Inheritance 
 
+inheritance format:
+    class italianChef : Chef 
+    
+    You can also override methods that the class is inheriting from if within your Chef class you define a special key to
+    be "virtual" 
+
+    ex: 
+        ## in the chef class
+        public virtual void MakeSpecialDish() 
+        {
+            Console.WriteLine("Hello")
+        }
+        ## in the italian chef class.   
+        public override void MakeSpecialDish() 
+        {
+            Console.WriteLine("Hello")
+        }
 
 
 # Getters and Setters
