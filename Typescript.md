@@ -69,5 +69,75 @@ There are often times where we want to describe the least-capable type in TypeSc
 
 In the code above, we see vUknown is assigned a int type. After that you cant reassign it to be a string. 
 
+# Typescript infer
 
+let a;
+a = 10
+a = true; 
+
+if you dont define variable types typescript automatically infers the data type. In this exampple, a is going to be equivalent to like an any
+
+whereas writing a code like this
+
+let a = 10
+a = true <-- this wont work. a is now a number type. 
+
+is closer in equivalency to unknown.
+
+# Union of types:
+
+multiType : number | boolean; 
+
+multiType = 20;
+multiType = false; 
+
+You can assign variables to have more than one type. 
+
+# Functions
+```
+function add(num1: number, num2: number) : number {
+    return num1 + num2
+};
+```
+you can define argument data types as well as output data types
+
+```
+function fullName(person: { firstName: string, lastName: string}) : string {
+
+}
+```
+
+ Interfaces 
+interface Person {
+    firstName: string,
+    lastName?: string  (A question mark makes it so that the property becomes an optional property type)
+}
+
+this can replace the code above to instead of defining the datatype for arg to be above, you can replace 
+
+fullName(person: Person)
+
+Interface is similar to like custom data types. 
+
+# Class
+```
+class Employee extends AnotherClass {
+    employeeName: string
+    
+    constructor (name: string) {
+        super(AnotherClass)
+        this.employeeName = name; 
+    }
+
+    greet() {
+        console.log("Good morning ${this.employeeName})
+    }
+}
+```
+pretty much the same as ES6 syntax. 
+You can add public or private attributes to your class as well. For example, employeeName: string can be 
+
+```
+public employeeName: string 
+``` 
 
