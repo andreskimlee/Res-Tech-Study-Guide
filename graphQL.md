@@ -187,3 +187,10 @@ app.listen(5000, () => console.log('Server Running'))
     in the code above, for books with authors. The authors points to the book where its id is equal to a books id. This is
     executed in the resolve. 
 
+We use functions in resolve to prevent errors since the data relies on each other when they have a relationship. 
+
+
+Mutations are Essentially our Post/Put/Patch
+
+GraphQLNonNull is similar to a validations to ensure no null value is passed into args.
+
